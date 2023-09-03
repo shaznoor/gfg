@@ -46,10 +46,29 @@ class KLargestElements {
     }
 
     static int[] kLargest(int[] arr, int n, int k) {
-        int[] ans = new int[k];
+        /*int[] ans = new int[k];
         Arrays.sort(arr);
         for(int i=0;i<k;i++){
             ans[i]=arr[n-i-1];
+        }
+        return ans;*/
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(arr[i]);
+        }
+
+        PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
+        int[] ans =new int[k];
+        for (int i=0 ; i<n ; i++) {
+            q.add(list.get(i));
+        }
+
+        int l=0;
+        while(k-- > 0){
+            int m = q.poll();
+            ans[l]=m;
+            l++;
         }
         return ans;
     }
